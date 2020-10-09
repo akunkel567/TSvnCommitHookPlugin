@@ -3,27 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.complex</groupId>
-    <artifactId>ClxSvnTools</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <artifactId>TSvnCommitHookPlugin</artifactId>
+    <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>${project.artifactId} - ${project.version}</name>
 
     <build>
         <plugins>
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>de.kunkels.kuaprecommithook.KuaPreCommitHook</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>-->
-
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
