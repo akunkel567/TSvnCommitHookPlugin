@@ -6,6 +6,7 @@
 package de.complex.svntools.hook.commandline;
 
 import de.complex.svntools.config.Config;
+import de.complex.svntools.tools.ConfigTool;
 import org.apache.log4j.*;
 import org.apache.log4j.xml.DOMConfigurator;
 
@@ -109,13 +110,5 @@ public class Main {
             throw new Exception(msg);
         }
 
-        hookType = HookType.findByValue(hook_type);
-        if (hookType == null) {
-            String msg = String.format("hook_type '%s' is not a valid value.", hook_type);
-            LOG.fatal(msg);
-            throw new Exception(msg);
-        }
-
-        LOG.debug("hookType: " + hookType);
     }
 }
