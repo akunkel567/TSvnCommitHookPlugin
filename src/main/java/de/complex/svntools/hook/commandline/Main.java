@@ -11,7 +11,9 @@ import de.complex.svntools.hook.executor.PreCommitExecutor;
 import de.complex.svntools.hook.tortoise.HookType;
 import de.complex.svntools.hook.tortoise.precommit.PreCommit;
 import de.complex.svntools.tools.ConfigTool;
-
+import de.complex.svntools.tools.ConfigTool;
+import org.apache.log4j.*;
+import org.apache.log4j.xml.DOMConfigurator;
 import java.io.File;
 import java.io.IOException;
 import javax.xml.parsers.FactoryConfigurationError;
@@ -142,5 +144,32 @@ public class Main {
         }
 
         LOG.debug("hookType: " + hookType);
+    }
+
+    private void checkConfigParameters() throws Exception {
+        String configFileName = System.getProperty("config");
+
+        if (configFileName == null) {
+            String msg = "config is a required value.";
+            LOG.fatal(msg);
+            throw new Exception(msg);
+        }
+
+        configFile = new File(configFileName);
+        if (!configFile.exists()) {
+            String msg = String.format("ConfigFile '%s' not exists.", configFileName);
+            LOG.fatal(msg);
+            throw new Exception(msg);
+        }
+
+        this.config = ConfigTool.loadConfig(configFile);
+
+        String hook_type = System.getProperty("hook_type");
+        if (hook_type == null) {
+            String msg = "hook_type is a required value.";
+            LOG.fatal(msg);
+            throw new Exception(msg);
+        }
+
     }
 }
