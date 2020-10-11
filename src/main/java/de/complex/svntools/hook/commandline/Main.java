@@ -145,31 +145,4 @@ public class Main {
 
         LOG.debug("hookType: " + hookType);
     }
-
-    private void checkConfigParameters() throws Exception {
-        String configFileName = System.getProperty("config");
-
-        if (configFileName == null) {
-            String msg = "config is a required value.";
-            LOG.fatal(msg);
-            throw new Exception(msg);
-        }
-
-        configFile = new File(configFileName);
-        if (!configFile.exists()) {
-            String msg = String.format("ConfigFile '%s' not exists.", configFileName);
-            LOG.fatal(msg);
-            throw new Exception(msg);
-        }
-
-        this.config = ConfigTool.loadConfig(configFile);
-
-        String hook_type = System.getProperty("hook_type");
-        if (hook_type == null) {
-            String msg = "hook_type is a required value.";
-            LOG.fatal(msg);
-            throw new Exception(msg);
-        }
-
-    }
 }
