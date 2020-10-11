@@ -28,6 +28,8 @@ public class Main {
      */
     public static void main(String[] args) throws IOException {
 
+        initLogging();
+
         Main main = null;
         try {
             main = new Main();
@@ -47,6 +49,34 @@ public class Main {
     }
 
     public Main() throws Exception {
+    }
+
+    private static void initLogging() throws FactoryConfigurationError {
+        try {
+            String log4jconfig = System.getProperty("log4j");
+            if (log4jconfig == null) {
+                throw new MainConfigException("The log4-config-value is not defined.");
+            }
+
+            File log4j = new File(log4jconfig);
+            if (!log4j.exists()) {
+                throw new MainConfigException("The log4-config-file does not exist.");
+            }
+
+            DOMConfigurator.configure(log4j.getAbsolutePath());
+        } catch (MainConfigException ex) {
+            try {
+                SimpleLayout layout = new SimpleLayout();
+                FileAppender fileAppender = new FileAppender(layout, "./commitHook.log");
+                BasicConfigurator.configure(fileAppender);
+                Logger.getRootLogger().setLevel(Level.ALL);
+
+                LOG.warn(ex.getMessage());
+            } catch (Exception e) {
+                System.err.append(e.getMessage());
+                System.exit(1);
+            }
+        }
     }
 
     private void execute(String[] args) throws Exception {
