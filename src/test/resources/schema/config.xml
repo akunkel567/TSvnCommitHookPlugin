@@ -1,0 +1,29 @@
+<config>
+    <rule name="name1">
+        <filter type="regex">f1</filter>
+        <not_allowed regex="true">aa1</not_allowed>
+        <not_allowed regex="true">aa2</not_allowed>
+        <not_allowed regex="true">aa3</not_allowed>
+        <must_have regex="false">bb4</must_have>
+        <must_have regex="false">bb5</must_have>
+        <must_have regex="false">bb6</must_have>
+    </rule>
+    <rule name="name2">
+        <filter type="regex">f2</filter>
+        <not_allowed regex="true">aa11</not_allowed>
+        <not_allowed regex="true">aa22</not_allowed>
+        <not_allowed regex="true">aa33</not_allowed>
+        <must_have regex="false">bb44</must_have>
+        <must_have regex="false">bb55</must_have>
+        <must_have regex="false">bb66</must_have>
+    </rule>
+    <rule name="name3">
+        <filter type="regex">f3</filter>
+        <not_allowed regex="true">aa111</not_allowed>
+        <not_allowed regex="true">aa222</not_allowed>
+        <not_allowed regex="true">aa333</not_allowed>
+        <must_have regex="false">bb444</must_have>
+        <must_have regex="false">bb555</must_have>
+        <must_have regex="false">bb666</must_have>
+    </rule>
+</config>
