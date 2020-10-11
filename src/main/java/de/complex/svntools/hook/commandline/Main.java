@@ -6,6 +6,7 @@
 package de.complex.svntools.hook.commandline;
 
 import de.complex.svntools.config.Config;
+import de.complex.svntools.tools.ConfigTool;
 import org.apache.log4j.*;
 import org.apache.log4j.xml.DOMConfigurator;
 
@@ -49,6 +50,7 @@ public class Main {
     }
 
     public Main() throws Exception {
+        checkConfigParameters();
     }
 
     private static void initLogging() throws FactoryConfigurationError {
@@ -81,5 +83,32 @@ public class Main {
 
     private void execute(String[] args) throws Exception {
         LOG.debug("Main execute");
+    }
+
+    private void checkConfigParameters() throws Exception {
+        String configFileName = System.getProperty("config");
+
+        if (configFileName == null) {
+            String msg = "config is a required value.";
+            LOG.fatal(msg);
+            throw new Exception(msg);
+        }
+
+        configFile = new File(configFileName);
+        if (!configFile.exists()) {
+            String msg = String.format("ConfigFile '%s' not exists.", configFileName);
+            LOG.fatal(msg);
+            throw new Exception(msg);
+        }
+
+        this.config = ConfigTool.loadConfig(configFile);
+
+        String hook_type = System.getProperty("hook_type");
+        if (hook_type == null) {
+            String msg = "hook_type is a required value.";
+            LOG.fatal(msg);
+            throw new Exception(msg);
+        }
+
     }
 }
