@@ -26,26 +26,24 @@ public class MustHaveTest {
         mustHave.validate(new StringContent("testtesttesttest"));
     }
 
-    @Test(expected = MustHaveValidationException.class)
+    @Test
     public void testValidateContentOK() throws Exception {
 
         MustHave mustHave = new MustHave("DEFINER", false);
-        mustHave.validate(new StringContent("testtesttesttest"));
+        mustHave.validate(new StringContent("testtestDEFINERtesttest"));
     }
 
     @Test(expected = MustHaveValidationException.class)
-    @Ignore
     public void testValidateContentRegexNotOK() throws Exception {
 
-        MustHave mustHave = new MustHave("DEFINER", true);
+        MustHave mustHave = new MustHave(".*DEFINER.*", true);
         mustHave.validate(new StringContent("testtesttesttest"));
     }
 
     @Test
-    @Ignore
     public void testValidateContentRegexOK() throws Exception {
 
-        MustHave mustHave = new MustHave("DEFINER", true);
+        MustHave mustHave = new MustHave(".*DEFINER.*", true);
         mustHave.validate(new StringContent("testtestDEFINERtesttest"));
     }
 }
