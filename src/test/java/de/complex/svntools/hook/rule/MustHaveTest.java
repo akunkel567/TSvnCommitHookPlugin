@@ -26,11 +26,11 @@ public class MustHaveTest {
         mustHave.validate(new StringContent("testtesttesttest"));
     }
 
-    @Test(expected = MustHaveValidationException.class)
+    @Test
     public void testValidateContentOK() throws Exception {
 
         MustHave mustHave = new MustHave("DEFINER", false);
-        mustHave.validate(new StringContent("testtesttesttest"));
+        mustHave.validate(new StringContent("testtestDEFINERtesttest"));
     }
 
     @Test(expected = MustHaveValidationException.class)
