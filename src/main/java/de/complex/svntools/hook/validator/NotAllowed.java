@@ -11,8 +11,8 @@ import de.complex.svntools.hook.validator.exception.NotAllowedValidationExceptio
 import de.complex.svntools.hook.validator.exception.ValidateException;
 import de.complex.svntools.tools.StringTools;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Andreas Kunkel
@@ -30,7 +30,17 @@ public class NotAllowed {
     public void validate(Content content) throws ValidateException {
 
         if (this.regex) {
-            throw new UnsupportedOperationException("Regex functionality not implemented yet.");
+            Pattern pattern = Pattern.compile(this.value);
+            Matcher matcher = null;
+            try {
+                matcher = pattern.matcher(content.getValue());
+            } catch (ContentException ex) {
+                throw new ValidateException(ex);
+            }
+
+            if (matcher.matches()) {
+                throw new NotAllowedValidationException(String.format("Data contains not allowed content for regex pattern '%s'", value));
+            }
         } else {
 
             try {

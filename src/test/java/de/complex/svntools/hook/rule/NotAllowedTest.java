@@ -34,18 +34,16 @@ public class NotAllowedTest {
     }
 
     @Test(expected = NotAllowedValidationException.class)
-    @Ignore
     public void testValidateContentRegexNotOK() throws Exception {
 
-        NotAllowed notAllowed = new NotAllowed("DEFINER", true);
+        NotAllowed notAllowed = new NotAllowed(".*DEFINER.*", true);
         notAllowed.validate(new StringContent("testDEFINERtest"));
     }
 
     @Test
-    @Ignore
     public void testValidateContentRegexOK() throws Exception {
 
-        NotAllowed notAllowed = new NotAllowed("DEFINER", true);
+        NotAllowed notAllowed = new NotAllowed(".*DEFINER.*", true);
         notAllowed.validate(new StringContent("testtesttesttest"));
     }
 }
